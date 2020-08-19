@@ -20,8 +20,12 @@ public class Robot implements SuperAction{
     }
 
     @Override
-    public void jump(HavingSportParam wall) {
-        System.out.println("Robot " + this.name + (wall.getParam() > this.maxJump? " did not jumped over wall " : " jumped over wall ") + wall.getParam() + " meters high");
+    public boolean jump(HavingSportParam wall) {
+        if (wall instanceof Wall){
+            System.out.println("Robot " + this.name + (wall.getParam() > this.maxJump? " did not jumped over wall " : " jumped over wall ") + wall.getParam() + " meters high");
+            return wall.getParam() > this.maxJump;
+        }
+        return false;
     }
 
     @Override
@@ -30,8 +34,12 @@ public class Robot implements SuperAction{
     }
 
     @Override
-    public void run(HavingSportParam track) {
-        System.out.println("Robot " + this.name + (track.getParam() > this.maxDist ? " did not ran a distance of " : " ran a distance of ") + track.getParam() + " meters");
+    public boolean run(HavingSportParam track) {
+        if (track instanceof RunningTrack){
+            System.out.println("Robot " + this.name + (track.getParam() > this.maxDist ? " did not ran a distance of " : " ran a distance of ") + track.getParam() + " meters");
+            return track.getParam() > this.maxDist;
+        }
+        return false;
     }
 
     @Override

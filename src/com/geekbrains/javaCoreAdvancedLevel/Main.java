@@ -14,7 +14,7 @@ public class Main {
 
         System.out.println("----Task1----");
         SuperAction[] myObjects = {new Human("Fry", 3, 1000),
-                new Robot("Bender", 1, 1500),
+                new Robot("Bender", 5, 1500),
                 new Cat("Cat", 2, 80)};
 
         for (SuperAction myObject : myObjects) {
@@ -37,12 +37,12 @@ public class Main {
         HavingSportParam[] myObstacles = {new Wall(1),
                 new RunningTrack(200),
                 new Wall(4),
-                new RunningTrack(1400)};
+                new RunningTrack(2000)};
 
         for (SuperAction myObject : myObjects) {
             for (HavingSportParam myObstacle : myObstacles) {
-                myObject.jump(myObstacle);
-                myObject.run(myObstacle);
+                if (myObject.jump(myObstacle)) break;
+                if (myObject.run(myObstacle)) break;
             }
         }
     }
