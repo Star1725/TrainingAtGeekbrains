@@ -1,4 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2;
+package com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2_3_4;
 
 public class Wall implements HavingSportParam{
     private int height;

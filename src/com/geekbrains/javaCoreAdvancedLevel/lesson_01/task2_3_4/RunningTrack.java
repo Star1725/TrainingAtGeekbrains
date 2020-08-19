@@ -1,4 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2;
+package com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2_3_4;
 
 public class RunningTrack implements HavingSportParam{
     private int length;

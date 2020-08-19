@@ -4,9 +4,9 @@ import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task1.Cat;
 import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task1.Human;
 import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task1.Robot;
 import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task1.SuperAction;
-import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2.HavingSportParam;
-import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2.RunningTrack;
-import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2.Wall;
+import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2_3_4.HavingSportParam;
+import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2_3_4.RunningTrack;
+import com.geekbrains.javaCoreAdvancedLevel.lesson_01.task2_3_4.Wall;
 
 public class Main {
 
