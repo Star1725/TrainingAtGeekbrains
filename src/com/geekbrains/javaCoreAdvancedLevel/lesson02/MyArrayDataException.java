@@ -1,4 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_02;
+package com.geekbrains.javaCoreAdvancedLevel.lesson02;
 
 public class MyArrayDataException extends NumberFormatException{
 

@@ -1,4 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_01.additional_task;
+package com.geekbrains.javaCoreAdvancedLevel.lesson01.additional_task;
 
 public enum DayOfWeek {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;

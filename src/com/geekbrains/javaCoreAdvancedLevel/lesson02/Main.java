@@ -1,6 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_02;
-
-import java.lang.reflect.Array;
+package com.geekbrains.javaCoreAdvancedLevel.lesson02;
 
 public class Main {
     public static void main(String[] args) {

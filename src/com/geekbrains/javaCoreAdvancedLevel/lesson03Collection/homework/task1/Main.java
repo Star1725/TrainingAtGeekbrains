@@ -1,4 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_03.task1;
+package com.geekbrains.javaCoreAdvancedLevel.lesson03Collection.homework.task1;
 
 import java.util.*;
 
