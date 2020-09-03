@@ -10,9 +10,9 @@ public class Calculation {
     static float[] arr1 = new float[SIZE];
     static float[] arr2 = new float[SIZE];
 
-    public void methodCalculation(float[] arr, int start){
+    public void methodCalculation(float[] arr, int start, int stop){
         System.out.println(Thread.currentThread().getName() + " calculation start");
-        for (int i = start; i < arr.length; i++) {
+        for (int i = start; i < stop; i++) {
             arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) *
                     Math.cos(0.4f + i / 2));
         }
@@ -22,10 +22,7 @@ public class Calculation {
     public void method1(){
         Object monitor = new Object();
         long startMethod1 = System.currentTimeMillis();
-        synchronized (monitor){
-            methodCalculation(arr1, 0);
-        }
-
+        methodCalculation(arr1, 0, SIZE);
         long stopMethod1 = System.currentTimeMillis();
         System.out.println(stopMethod1 - startMethod1);
     }
@@ -34,11 +31,12 @@ public class Calculation {
         float[] a1 = new float[HALF];
         long startMethod1 = System.currentTimeMillis();
         Thread t1 = new Thread(() -> {
-            methodCalculation(a1, 0);
-            System.arraycopy(a1, 0, arr2, 0, HALF);
+            methodCalculation(arr2, 0, HALF);
+//            methodCalculation(a1, 0);
+//            System.arraycopy(a1, 0, arr2, 0, HALF);
         });
         Thread t2 = new Thread(() -> {
-            methodCalculation(arr2, HALF);
+            methodCalculation(arr2, HALF, SIZE);
         });
         t1.start();
         t2.start();
