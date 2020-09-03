@@ -1,6 +1,6 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_01.additional_task;
+package com.geekbrains.javaCoreAdvancedLevel.lesson01.additional_task;
 
-import static com.geekbrains.javaCoreAdvancedLevel.lesson_01.additional_task.DayOfWeek.getWorkingHours;
+import static com.geekbrains.javaCoreAdvancedLevel.lesson01.additional_task.DayOfWeek.getWorkingHours;
 
 public class DayOfWeekMain {
     public static void main(String[] args) {

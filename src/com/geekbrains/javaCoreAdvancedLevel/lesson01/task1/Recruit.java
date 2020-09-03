@@ -1,4 +1,4 @@
-package com.geekbrains.javaCoreAdvancedLevel.lesson_01.task1;
+package com.geekbrains.javaCoreAdvancedLevel.lesson01.task1;
 
 public class Recruit implements Running, Jumping{
     private String name;
