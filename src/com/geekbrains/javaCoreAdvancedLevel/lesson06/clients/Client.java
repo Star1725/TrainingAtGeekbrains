@@ -10,9 +10,7 @@ public class Client {
     private final String IP_ADDRESS = "localhost";
     private final int PORT = 8189;
     private Socket socket;
-    private DataInputStream inNet;
-    private DataOutputStream outNet;
-    private BufferedReader inConsole;
+    private BufferedReader readConsole;
     private static final String NAME_SERVER = "Сервер";
     private static final String NAME_CLIENT = "Клиент";
     private final boolean[] isGetMsgFromNetMore = {false};
@@ -22,17 +20,19 @@ public class Client {
         client.start();
     }
     public void start(){
-
         try {
             socket = new Socket(IP_ADDRESS, PORT);
-            inNet = new DataInputStream(socket.getInputStream());
-            outNet = new DataOutputStream(socket.getOutputStream());
-            inConsole = new BufferedReader(new InputStreamReader(System.in));
+            DataInputStream inNet = new DataInputStream(socket.getInputStream());
+            DataOutputStream outNet = new DataOutputStream(socket.getOutputStream());
+            readConsole = new BufferedReader(new InputStreamReader(System.in));
             //поток для приёма сообщения от сервера и печать в консоль
             new Thread(() -> {
                 try {
                     while (true) {
                         //ПРМ
+                        if (socket.isClosed()) {
+                            break;
+                        }
                         String serverMsg = inNet.readUTF();
                         System.out.println(getNameApponent(isGetMsgFromNetMore) + " (" + getCurTime() + "): " + serverMsg);
                         isGetMsgFromNetMore[0] = true;
@@ -44,8 +44,10 @@ public class Client {
                     e.printStackTrace();
             } finally {
                     try {
-                        System.out.println("Server close socket");
-                        socket.close();
+                        if (!socket.isClosed()){
+                            System.out.println("Server close socket");
+                            socket.close();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -56,7 +58,7 @@ public class Client {
                 try {
                     while (true) {
                         //ПРД
-                        String clientMsg = inConsole.readLine();
+                        String clientMsg = readConsole.readLine();
                         isGetMsgFromNetMore[0] = false;
                         outNet.writeUTF(clientMsg);
                         if (clientMsg.equals("/end")) {
@@ -67,8 +69,10 @@ public class Client {
                 e.printStackTrace();
                 } finally {
                     try {
-                        System.out.println("Client close socket");
-                        socket.close();
+                        if (!socket.isClosed()){
+                            System.out.println("Client close socket");
+                            socket.close();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

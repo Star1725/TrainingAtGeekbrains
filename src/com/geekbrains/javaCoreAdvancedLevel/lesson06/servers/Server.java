@@ -30,35 +30,27 @@ public class Server {
             clientSocket = serverSocket.accept();
             System.out.println("Клиент подключился");
             //будем читать сообщения клиента - ПРМ
-            //Scanner in = new Scanner(clientSocket.getInputStream());//Scanner не очень подходит
             DataInputStream in = new DataInputStream(clientSocket.getInputStream());
-            //будем отправлять сообщения клиенту - ПРД
-            //PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);//PrintWriter - не очень подходит
             DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
-
             BufferedReader readerServer = new BufferedReader( new InputStreamReader(System.in));
 
             //приём сообщения от клиента и вывод его в консоль
             new Thread(() -> {
                 try {
                     while (true){
+                        if (clientSocket.isClosed()) break;
                         String clientMsg = in.readUTF();
                         System.out.println(getNameClient(isGetMsgFromNetMore) + " (" + getCurTime() + "): " + clientMsg);
                         isGetMsgFromNetMore[0] = true;
                         if (clientMsg.equals("/end")){
-                            System.out.println("Клиент отключился");
+                            System.out.println(NAME_CLIENT + " отключился");
                             break;
                         }
                     }
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 } finally {
-                    try {
-                        clientSocket.close();
-                        serverSocket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    freeUpResources();
                 }
             }).start();
 
@@ -68,23 +60,32 @@ public class Server {
                     while (true) {
                         String serverMsg = readerServer.readLine();
                         isGetMsgFromNetMore[0] = false;
+                        if (clientSocket.isClosed()) {
+                            break;
+                        }
                         out.writeUTF(serverMsg);
                         if (serverMsg.equals("/end")) {
-                            System.out.println("Сервер отключился");
+                            System.out.println(NAME_SERVER + " отключился");
                             break;
                         }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    try {
-                        clientSocket.close();
-                        serverSocket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    freeUpResources();
                 }
             }).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void freeUpResources() {
+        try {
+            if (!(serverSocket.isClosed() & clientSocket.isClosed())){
+                clientSocket.close();
+                serverSocket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
