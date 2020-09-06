@@ -48,7 +48,7 @@ public class Server {
                         }
                     }
                 } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                    System.out.println(ioException.getMessage());
                 } finally {
                     freeUpResources();
                 }
@@ -70,7 +70,7 @@ public class Server {
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 } finally {
                     freeUpResources();
                 }
